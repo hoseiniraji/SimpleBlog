@@ -18,7 +18,7 @@ namespace SimpleBlog.Models
         [StringLength(255)]
         public string? ImageUrl { get; set; }
         public DateTime CreateDate { get; set; }
-
+        
         public int ContentId { get; set; }
         public virtual Content? Content { get; set; }
         public virtual ICollection<BlogPost> Posts { get; set; }

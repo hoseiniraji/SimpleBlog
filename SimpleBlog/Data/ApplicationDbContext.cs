@@ -18,14 +18,27 @@ namespace SimpleBlog.Data
 
             // make token field unique to prevent dupicate url issues
             builder.Entity<Content>().HasIndex(c => c.Token).IsUnique();
+            builder.Entity<BlogPost>().HasIndex(c => c.ContentId);
+            builder.Entity<BlogCagtegory>().HasIndex(c => c.ContentId);
 
             // seed data
-            var contentBuilder = new ContentBuilder();
-            builder.Entity<BlogCagtegory>().HasData([
-                contentBuilder.NewBlogCategoryBuilder().SetTitle("Tec news" , "technology").SetId(1).SetContentId(1),
-                contentBuilder.NewBlogCategoryBuilder().SetTitle("Top musics" , "music").SetId(2).SetContentId(2),
-                contentBuilder.NewBlogCategoryBuilder().SetTitle("Financial tips").SetId(3).SetContentId(3),
+            builder.Entity<Content>().HasData([
+                new Content() { Id = 1, Token = "technology" , EntityType = Framework.ContentEntityType.BLogCategory},
+                new Content() { Id = 2, Token = "music",  EntityType = Framework.ContentEntityType.BLogCategory},
+                new Content() { Id = 3, Token = "Financial tips", EntityType = Framework.ContentEntityType.BLogCategory},
                 ]);
+
+            var contentBuilder = new ContentBuilder();
+
+            var seedCategoryList = new BlogCagtegory[]
+            {
+                contentBuilder.NewBlogCategoryBuilder().SetTitle("Tec news").SetId(1).SetContentId(1).Build(),
+                contentBuilder.NewBlogCategoryBuilder().SetTitle("Top musics").SetId(2).SetContentId(2).Build(),
+                contentBuilder.NewBlogCategoryBuilder().SetTitle("Financial tips").SetId(3).SetContentId(3).Build(),
+            };
+            builder.Entity<BlogCagtegory>().HasData(seedCategoryList);
+
+
             //builder.Entity<BlogCagtegory>().HasData([
             //    new BlogCagtegory(){
             //        Content = new Content(){

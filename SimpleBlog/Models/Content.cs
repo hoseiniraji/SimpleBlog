@@ -23,7 +23,6 @@ namespace SimpleBlog.Models
         public DateTime CreateDate { get; set; }
 
         public ContentEntityType EntityType { get; set; }
-        public int EntityId { get; set; }
 
         public DateTime GetDate()
         {

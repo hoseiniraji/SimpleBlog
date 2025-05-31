@@ -22,10 +22,7 @@ namespace SimpleBlog.Builders
             {
                 post = new BlogPost()
                 {
-                    Content = new Content()
-                    {
-                        EntityType = ContentEntityType.BlogPost,
-                    }
+                   
                 };
 
             }
@@ -35,7 +32,6 @@ namespace SimpleBlog.Builders
                 if (!string.IsNullOrEmpty(title))
                 {
                     post.Title = title;
-                    post.Content.Token = token ?? title;
                 }
 
                 return this;
@@ -58,14 +54,12 @@ namespace SimpleBlog.Builders
             public BlogPostBuilder SetId(int id)
             {
                 post.Id = id;
-                post.Content.EntityId = id;
                 return this;
             }
 
             public BlogPostBuilder SetContentId(int contentId)
             {
                 post.ContentId = contentId;
-                post.Content.Id = contentId;
                 return this;
             }
 
@@ -95,10 +89,6 @@ namespace SimpleBlog.Builders
             {
                 category = new BlogCagtegory()
                 {
-                    Content = new Content()
-                    {
-                        EntityType = ContentEntityType.BLogCategory,
-                    }
                 };
             }
 
@@ -107,7 +97,6 @@ namespace SimpleBlog.Builders
                 if (!string.IsNullOrEmpty(title))
                 {
                     category.Name = title;
-                    category.Content.Token = token ?? title;
                 }
 
                 return this;
@@ -122,14 +111,12 @@ namespace SimpleBlog.Builders
             public BlogCategoryBuilder SetId(int id)
             {
                 category.Id = id;
-                category.Content.EntityId = id;
                 return this;
             }
 
             public BlogCategoryBuilder SetContentId(int contentId)
             {
                 category.ContentId = contentId;
-                category.Content.Id = contentId;
                 return this;
             }
 
