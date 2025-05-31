@@ -23,6 +23,9 @@ namespace SimpleBlog.Models
         public virtual Content? Content { get; set; }
         public int CategoryId { get; set; }
         public virtual BlogCagtegory? Cagtegory { get; set; }
+        public string AuthorId { get; set; }
+        public User Author { get; set; }
+
         public DateTime GetDate()
         {
             return LastModifiedDate;
