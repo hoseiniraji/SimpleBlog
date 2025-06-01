@@ -4,14 +4,15 @@ namespace SimpleBlog.Framework
 {
     public class PageList<T> : Pagination, IEnumerable<T>
     {
-        public PageList(IEnumerable<T> items, int currentPage, int capacity, int allItemsCount)
+        public PageList(IEnumerable<T> items, int currentPage, int capacity, int allItemsCount, string searchTerm = "")
             : base(currentPage, capacity, allItemsCount)
         {
             Items = items;
+            SearchTerm = searchTerm;
         }
 
         private readonly IEnumerable<T> Items;
-
+        public string SearchTerm { get; set; }
         public IEnumerator<T> GetEnumerator()
         {
             return Items.GetEnumerator();

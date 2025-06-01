@@ -21,6 +21,9 @@ namespace SimpleBlog.Data
             builder.Entity<BlogPost>().HasIndex(c => c.ContentId);
             builder.Entity<BlogCagtegory>().HasIndex(c => c.ContentId);
 
+            // exclude removed items
+            builder.Entity<BlogPost>().HasQueryFilter(c => !c.Removed);
+
             // seed data
             builder.Entity<Content>().HasData([
                 new Content() { Id = 1, Token = "technology" , EntityType = Framework.ContentEntityType.BLogCategory},

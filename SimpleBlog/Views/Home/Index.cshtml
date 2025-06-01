@@ -33,7 +33,7 @@
 
             @if (User.Identity.IsAuthenticated)
             {
-                <a class="btn btn-primary">Manage Blog posts</a>
+                <a class="btn btn-primary" asp-controller="BlogPosts" asp-action="Index">Manage Blog posts</a>
             }
             else
             {

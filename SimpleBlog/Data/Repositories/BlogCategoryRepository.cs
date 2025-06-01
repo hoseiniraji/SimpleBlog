@@ -9,7 +9,7 @@ namespace SimpleBlog.Data.Repositories
     {
         public async Task<BlogCagtegory> GetByContentIdAsync(int contentId)
         {
-            var result = await GetAllAsync(c => c.ContentId == contentId).FirstOrDefaultAsync();
+            var result = await GetAll(c => c.ContentId == contentId).FirstOrDefaultAsync();
             return result ?? throw new NullReferenceException();
         }
     }

@@ -45,10 +45,5 @@ namespace SimpleBlog.Data.Repositories
             _context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
-
-        public IQueryable<TEntity> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
-        {
-            return predicate == null ? DbSet : DbSet.Where(predicate);
-        }
     }
 }

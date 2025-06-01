@@ -47,5 +47,31 @@ namespace SimpleBlog.Data
         }
 
         #endregion
+
+        public int SaveChanges()
+        {
+            try
+            {
+                return _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            try
+            {
+                return await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

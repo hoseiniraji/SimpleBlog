@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SimpleBlog.Models.BlogPost>
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>History</h1>
+
+<div class="row">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        @if (item.ActiveVersion)
+                        {
+                            <span class="badge badge-pill bg-primary">Active version</span>
+                        }
+                        else
+                        {
+                            <form method="post" asp-controller="BlogPosts" asp-action="UpdateActiveVersion" asp-route-id="@item.Id">
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Use this version</button>
+                            </form>
+                        }
+                        <p>@item.GetDate().ToString("yyyy-MM-dd HH:mm:ss")</p>
+                        <h3>@item.GetTitle()</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>@item.Category.GetTitle()</p>
+                        @Html.Raw(item.GetDescription())
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="BlogPosts" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit this versoin</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<a asp-action="Index">Back to List</a>

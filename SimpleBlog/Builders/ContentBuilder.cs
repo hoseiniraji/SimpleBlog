@@ -22,7 +22,7 @@ namespace SimpleBlog.Builders
             {
                 post = new BlogPost()
                 {
-                   
+
                 };
 
             }
@@ -60,6 +60,12 @@ namespace SimpleBlog.Builders
             public BlogPostBuilder SetContentId(int contentId)
             {
                 post.ContentId = contentId;
+                return this;
+            }
+
+            public BlogPostBuilder SetAuthorId(string authorId)
+            {
+                post.AuthorId = authorId;
                 return this;
             }
 
