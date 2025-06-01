@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SimpleBlog.Framework;
 using SimpleBlog.Models;
 using System.Linq.Expressions;
 
@@ -9,15 +10,16 @@ namespace SimpleBlog.Data.Repositories
     {
         public override IQueryable<BlogPost> GetAll(Expression<Func<BlogPost, bool>>? predicate = null)
         {
-            return 
+            return
                 base.GetAllAsync(predicate)
+                    .Include(p => p.Content)
                     .Include(p => p.Category);
         }
 
         public override async Task<BlogPost> GetAsync(int id)
         {
-            return 
-                await this.GetAllAsync(c => c.Id == id).FirstOrDefaultAsync() 
+            return
+                await this.GetAllAsync(c => c.Id == id).FirstOrDefaultAsync()
                 ?? throw new NullReferenceException();
         }
 
@@ -28,6 +30,19 @@ namespace SimpleBlog.Data.Repositories
             return result ?? throw new NullReferenceException();
         }
 
+        public async Task<PageList<BlogPost>> GetPagedAsync(int p, int c, string q)
+        {
+            var query = GetAll(p => p.ActiveVersion && (string.IsNullOrEmpty(q) || p.Title.Contains(q)));
+            var allItemsCount = await query.CountAsync();
+            var items = await query
+                            .OrderByDescending(p => p.Id)
+                            .Skip((p - 1) * c)
+                            .Take(c)
+                            .ToListAsync();
 
+            var result = new PageList<BlogPost>(items, p, c, allItemsCount);
+            return result;
+
+        }
     }
 }

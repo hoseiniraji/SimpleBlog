@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SimpleBlog.Data;
+using SimpleBlog.Framework;
 using SimpleBlog.Models;
 
 namespace SimpleBlog.Controllers
@@ -16,9 +17,17 @@ namespace SimpleBlog.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p">current page</param>
+        /// <param name="c">page capacity</param>
+        /// <param name="q">search term</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Index(int p = 1, int c = 10 , string q = "")
         {
-            return View();
+            PageList<BlogPost> posts = await _unitOfWork.BlogPosts.GetPagedAsync(p , c, q);
+            return View(posts);
         }
 
         public IActionResult Privacy()

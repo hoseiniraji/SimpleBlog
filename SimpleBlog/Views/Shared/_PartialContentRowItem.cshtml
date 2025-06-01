@@ -1,0 +1,11 @@
+﻿@model SimpleBlog.Framework.IContent
+
+<div class="row">
+    <div class="col-sm-2">
+        <a href="@Model.GetUrl()" target="_blank"><img src="@Model.GetMainImage()" /></a>
+    </div>
+    <div class="col-sm-10">
+        <h2><a href="@Model.GetUrl()" target="_blank">@Model.GetTitle()</a></h2>
+        <p><small>@Model.GetDate().ToShortDateString()</small></p>
+    </div>
+</div>

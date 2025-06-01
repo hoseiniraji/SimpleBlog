@@ -1,12 +1,17 @@
 ﻿namespace SimpleBlog.Framework
 {
-    public interface IContent<TId> : IEntity<TId>
+
+    public interface IContent
     {
-        TId GetId();
         string GetTitle();
         string GetDescription();
         string GetUrl();
         string GetMainImage();
         DateTime GetDate();
+    }
+    public interface IContent<TId> : IContent, IEntity<TId>
+    {
+        TId GetId();
+
     }
 }
