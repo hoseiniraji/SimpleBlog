@@ -1,4 +1,5 @@
-﻿using SimpleBlog.Framework;
+﻿using SimpleBlog.Dtos.BlogPostDtos;
+using SimpleBlog.Framework;
 
 namespace SimpleBlog.Models
 {
@@ -53,6 +54,11 @@ namespace SimpleBlog.Models
         {
             return Content?.GetUrl()
                 ?? throw new NullReferenceException("Related content not found");
+        }
+
+        public BlogPostDto AsDto()
+        {
+            return new BlogPostDto(GetId(), GetTitle(), GetDescription(), GetMainImage(), GetUrl(), CategoryId, Category?.GetTitle() ?? string.Empty);
         }
     }
 }
