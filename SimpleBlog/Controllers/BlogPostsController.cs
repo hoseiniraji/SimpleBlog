@@ -131,7 +131,7 @@ namespace SimpleBlog.Controllers
                 return NotFound();
             }
             UseBlogCategoriesDropdown(post.CategoryId);
-            var dto = new UpdateBlogPostDto(post.Id, post.ContentId, post.Title, post.Content.Token, post.Body, post.CategoryId);
+            var dto = new UpdateBlogPostDto(post.Id, post.ContentId, post.Title, post.Content.Token, post.Body, post.GetMainImage(), post.CategoryId);
             return View(dto);
         }
 

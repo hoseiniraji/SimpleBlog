@@ -16,6 +16,14 @@
             <input type="hidden" asp-for="ContentId" />
 
             <div class="form-group">
+                <label for="mainImage" class="cursor-pointer bordered">
+                    <input type="file" id="mainImage" name="image" style="display:none;" />
+                    <img class="img img-thumbnail" src="@Model.imageUrl" />
+
+                </label>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
@@ -33,14 +41,14 @@
                 <textarea asp-for="Body" class="form-control"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-           
-           
+
+
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
-          
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -52,3 +60,8 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script src="~/js/image-picker.js"></script>
+    <script src="~/js/blog/craete.js" asp-append-version="true"></script>
+
+}

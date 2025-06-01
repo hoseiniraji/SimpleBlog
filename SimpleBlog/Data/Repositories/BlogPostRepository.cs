@@ -80,6 +80,10 @@ namespace SimpleBlog.Data.Repositories
                 string imagePath = await SaveImage(_env, image);
                 builder.SetImage(imagePath);
             }
+            else
+            {
+                builder.SetImage(oldVersion.GetMainImage());
+            }
             var post = builder.Build();
             await CreateAsync(post);
 

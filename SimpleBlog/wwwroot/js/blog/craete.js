@@ -29,6 +29,10 @@ $(() => {
 
     showUniqueNameHint($('#Token').val());
 
+    $('#mainImage').change(function () {
+        previewUpload(this);
+    });
+
 
 })
 

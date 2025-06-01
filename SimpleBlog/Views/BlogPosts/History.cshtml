@@ -27,6 +27,7 @@
                         <h3>@item.GetTitle()</h3>
                     </div>
                     <div class="card-body">
+                        <img class="img-thumbnail" style="max-width: 75px; height: auto;" src="@item.GetMainImage()" />
                         <p>@item.Category.GetTitle()</p>
                         @Html.Raw(item.GetDescription())
                     </div>
