@@ -16,23 +16,15 @@ namespace SimpleBlog.Settings
         {
             string? clientId = configuration["Authentication:Google:ClientId"];
             string? secret = configuration["Authentication:Google:Secret"];
-            if(string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(secret))
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(secret))
                 throw new ArgumentNullException("Invalid Google auth configuration");
 
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultChallengeScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
-                auth.DefaultForbidScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
-                auth.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-                    .AddCookie()
+            services.AddAuthentication()
                     .AddGoogleOpenIdConnect(options =>
                     {
                         options.ClientId = clientId;
                         options.ClientSecret = secret;
-                    })
-
-                ;
+                    });
 
             return services;
         }
