@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SimpleBlog.Data;
+using SimpleBlog.Extensions;
 using SimpleBlog.Models;
 using SimpleBlog.Settings;
 
@@ -21,12 +22,14 @@ namespace SimpleBlog
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+
 
             builder.Services.AddSession(opt => { opt.Cookie.IsEssential = true; });
             builder.Services.AddGoogleAuthentication(builder.Configuration);
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddUnitOfWork();
 
             var app = builder.Build();
 
@@ -44,11 +47,11 @@ namespace SimpleBlog
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseSession();
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 

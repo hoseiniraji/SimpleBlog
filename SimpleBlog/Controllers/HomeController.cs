@@ -8,12 +8,12 @@ namespace SimpleBlog.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        private readonly UnitOfWork _unitOfWork;
+        //private readonly ApplicationDbContext _context;
+        public HomeController(ILogger<HomeController> logger, UnitOfWork unitOfWork)
         {
             _logger = logger;
-            var t = context.Contents.ToList();
-            var t2 = context.BlogCagtegories.ToList();
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
