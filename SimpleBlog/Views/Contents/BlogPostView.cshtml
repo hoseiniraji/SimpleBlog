@@ -1,0 +1,28 @@
+﻿@model SimpleBlog.Models.BlogPost
+@{
+    ViewData["Title"] = Model.GetTitle();
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img img-fluid" src="@Model.GetMainImage()" />
+            <p><small>@Model.GetDate().ToShortDateString()</small></p>
+            <p>Author: @Model.Author?.UserName</p>
+        </div>
+        <div class="col-md-9">
+            <!-- breadcrumb -->
+            <p>
+                <a asp-action="Index" asp-controller="Home">Home</a>
+                <span> / </span>
+                <a href="@Model.Category?.GetUrl()">@Model.Category?.GetTitle()</a>
+                <span> / </span>
+                <span>Posts:</span>
+            </p>
+            <h1>@Model.GetTitle()</h1>
+            <p><small>category: @Model.Category?.GetTitle()</small></p>
+            <hr />
+            @Html.Raw(Model.GetDescription())
+        </div>
+    </div>
+
+</div>

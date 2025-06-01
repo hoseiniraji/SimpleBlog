@@ -2,7 +2,7 @@
 {
     public static class Shared
     {
-        public const string NoImage = "/img/noimage.png";
+        public const string NoImage = "/img/noimage.webp";
 
         public const string BlogImageUploadPath = "/media/blog/";
     }

@@ -23,14 +23,22 @@ namespace SimpleBlog.Data.Repositories
         public override async Task<BlogPost> GetAsync(int id)
         {
             return
-                await this.GetAll(c => c.Id == id).FirstOrDefaultAsync()
+                await
+                this.GetAll(c => c.Id == id)
+                    .Include(p => p.Category)
+                    .ThenInclude(pc => pc.Content)
+                    .FirstOrDefaultAsync()
                 ?? throw new NullReferenceException();
         }
 
         public async Task<BlogPost> GetByContentIdAsync(int contentId)
         {
             // ensure fetch active version only
-            var result = await this.GetAll(c => c.ContentId == contentId && c.ActiveVersion).FirstOrDefaultAsync();
+            var result = await this
+                .GetAll(c => c.ContentId == contentId && c.ActiveVersion)
+                .Include(p => p.Category)
+                .ThenInclude(pc => pc.Content)
+                .FirstOrDefaultAsync();
             return result ?? throw new NullReferenceException();
         }
 

@@ -18,6 +18,7 @@
             <th>
                 Date
             </th>
+            <th>Category</th>
             <th>
                 Author
             </th>
@@ -37,6 +38,12 @@
                     @item.GetDate().ToShortDateString()
                 </td>
                 <td>
+                    @if (item.Category != null)
+                    {
+                        <span>@item.Category.GetTitle()</span>
+                    }
+                </td>
+                <td>
                     @if (item.Author != null)
                     {
                         <span>@item.Author.UserName</span>
@@ -45,7 +52,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="History" asp-route-id="@item.Id">All Versions</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a href="@item.GetUrl()">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

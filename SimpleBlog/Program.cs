@@ -58,6 +58,13 @@ namespace SimpleBlog
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+                name: "contents",
+                pattern: "{token?}",
+                defaults: new { Controller = "Contents", Action = "Details" }
+                );
+
             app.MapRazorPages();
 
             using (var scope = app.Services.CreateScope())

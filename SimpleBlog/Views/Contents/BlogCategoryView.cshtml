@@ -1,0 +1,26 @@
+﻿@model SimpleBlog.Models.BlogCagtegory
+@{
+    ViewData["Title"] = Model.GetTitle();
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img img-fluid" src="@Model.GetMainImage()" />
+        </div>
+        <div class="col-md-3">
+            <!-- breadcrumb -->
+            <p>
+                <a asp-action="Index" asp-controller="Home">Home</a>
+                <span> / </span>
+                <span>@Model.GetTitle():</span>
+            </p>
+            <h1>@Model.GetTitle()</h1>
+            <hr />
+            @foreach (var item in Model.Posts)
+            {
+                <partial name="_PartialContentRowItem" model="@item" view-data="ViewData" />
+            }
+        </div>
+    </div>
+
+</div>
