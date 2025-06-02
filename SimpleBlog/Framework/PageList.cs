@@ -2,7 +2,7 @@
 
 namespace SimpleBlog.Framework
 {
-    public class PageList<T> : Pagination, IEnumerable<T>
+    public class PageList<T> : Pagination, IPagedList<T>
     {
         public PageList(IEnumerable<T> items, int currentPage, int capacity, int allItemsCount, string searchTerm = "")
             : base(currentPage, capacity, allItemsCount)
@@ -24,7 +24,7 @@ namespace SimpleBlog.Framework
         }
 
         public int Count => Items?.Count() ?? 0;
-        public Pagination GetPagination()
+        public IPagination GetPagination()
         {
             return (Pagination)this;
         }

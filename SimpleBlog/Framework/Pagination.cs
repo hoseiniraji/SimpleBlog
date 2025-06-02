@@ -1,6 +1,6 @@
 ﻿namespace SimpleBlog.Framework
 {
-    public class Pagination
+    public class Pagination : IPagination
     {
         public Pagination(int currentPage, int capacity, int allItemsCount)
         {

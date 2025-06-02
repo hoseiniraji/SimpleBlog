@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace SimpleBlog.Data.Repositories
 {
     public class BlogPostRepository(ApplicationDbContext context)
-        : RepositoryBase<BlogPost, int>(context), IContentRepository<BlogPost, int>
+        : RepositoryBase<BlogPost, int>(context), IBlogPostRepository<BlogPost, int>
     {
         public override IQueryable<BlogPost> GetAll(Expression<Func<BlogPost, bool>>? predicate = null)
         {
@@ -42,7 +42,7 @@ namespace SimpleBlog.Data.Repositories
             return result ?? throw new NullReferenceException();
         }
 
-        public async Task<PageList<BlogPost>> GetPagedAsync(int p, int c, string q)
+        public async Task<IPagedList<BlogPost>> GetPagedAsync(int p, int c, string q)
         {
             var query = GetAll(p => p.ActiveVersion && (string.IsNullOrEmpty(q) || p.Title.Contains(q)));
             var allItemsCount = await query.CountAsync();

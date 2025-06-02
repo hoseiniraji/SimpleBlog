@@ -26,7 +26,7 @@ namespace SimpleBlog.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Index(int p = 1, int c = 10 , string q = "")
         {
-            PageList<BlogPost> posts = await _unitOfWork.BlogPosts.GetPagedAsync(p , c, q);
+            IPagedList<BlogPost> posts = await _unitOfWork.BlogPosts.GetPagedAsync(p , c, q);
             return View(posts);
         }
 

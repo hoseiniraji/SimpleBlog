@@ -28,7 +28,7 @@ namespace SimpleBlog.Areas.Api.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<BlogPostDto>>> GetBlogPosts(int p = 1, int c = 10)
         {
-            Framework.PageList<BlogPost> items = await _db.BlogPosts.GetPagedAsync(p, c, string.Empty);
+            Framework.IPagedList<BlogPost> items = await _db.BlogPosts.GetPagedAsync(p, c, string.Empty);
             var result = items.ToList().Select(t => t.AsDto()).ToList();
 
             return result;

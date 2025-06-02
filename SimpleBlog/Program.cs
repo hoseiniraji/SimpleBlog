@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using SimpleBlog.Data;
 using SimpleBlog.Extensions;
 using SimpleBlog.Models;
@@ -37,6 +38,7 @@ namespace SimpleBlog
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                IdentityModelEventSource.ShowPII = true;
             }
             else
             {
